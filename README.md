@@ -1,4 +1,4 @@
-# Project 6 - *Instagrame*
+# Project 6 - *Instagram*
 
 **Instagram** is a photo sharing app using Parse as its backend.
 
