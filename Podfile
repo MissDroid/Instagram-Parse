@@ -5,5 +5,6 @@ platform :ios, '8.0'
 
 target 'Instagram-Parse' do
     pod 'Parse'
+    pod 'ParseUI'
 end
 

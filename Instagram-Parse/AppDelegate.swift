@@ -7,15 +7,45 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let userDidLogoutNotification = "userDidLogoutNotification"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        Parse.initializeWithConfiguration(
+            ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
+                configuration.applicationId = "Instagram"
+                configuration.clientKey = "ofilwifj2p9329j2ofnwenwe"
+                configuration.server = "https://quiet-reef-31861.herokuapp.com/parse"
+            })
+        )
+        
+        if PFUser.currentUser() != nil
+        {
+            print ("Sorry \(PFUser.currentUser()?.username) is logged in")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("tabBarController")
+            
+            
+            window?.rootViewController = vc
+        }
+        
+      /*  NSNotificationCenter.defaultCenter().addObserverForName("UserDidLogout", object: nil, queue: NSOperationQueue.mainQueue()) {(NSNotification) -> Void in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+            
+            self.window?.rootViewController = vc
+        }
+*/
+        
         return true
     }
 
