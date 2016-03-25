@@ -26,9 +26,10 @@ class InstaCell: UITableViewCell {
         {
     didSet
     {
-      //  var instapic = post["photo"] as! PFObject
-        self.photoView.file = post["image"] as? PFFile
+        photoView.file = post["media"] as? PFFile
         captionLabel.text = post["caption"] as? String
+       // usernameLabel.text = post["author"] as? String
+        usernameLabel.text = PFUser.currentUser()?.username
         
     
     }

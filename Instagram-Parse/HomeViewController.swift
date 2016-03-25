@@ -44,6 +44,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let posts = posts {
                 self.photos = posts
                 self.tableView.reloadData()
+                print("we got em")
                 // do something with the data fetched
             } else {
                 print("error: \(error!.localizedDescription)")

@@ -46,10 +46,11 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
             // Get the image captured by the UIImagePickerController
             let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            
-            // Do something with the images (based on your use case)
-            captureView.contentMode = .ScaleAspectFit
             captureView.image = originalImage
+        
+            captureView.contentMode = .ScaleAspectFit
+            let newImage = Post.resize(originalImage, newSize: CGSize(width: 500, height: 300))
+            captureView.image = newImage
             
             // Dismiss UIImagePickerController to go back to your original view controller
             dismissViewControllerAnimated(true, completion: nil)
@@ -68,23 +69,23 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     @IBAction func onCamera(sender: AnyObject) {
-      /*
+      
         vc.delegate = self
         vc.allowsEditing = true
         vc.sourceType = UIImagePickerControllerSourceType.Camera
         
         self.presentViewController(vc, animated: true, completion: nil)
-*/
+
     }
     @IBAction func onUpload(sender: AnyObject) {
-        let newImage = Post.resize(captureView.image!, newSize: CGSize(width: 300, height: 500))
-        Post.postUserImage(newImage, withCaption: captionText.text) { (success: Bool, error: NSError?) -> Void in
+        let uploadImage = Post.resize(captureView.image!, newSize: CGSize(width: 500, height: 300))
+        Post.postUserImage(uploadImage, withCaption: captionText.text) { (success: Bool, error: NSError?) -> Void in
            
             if success {
                 print("It is live!!!")
                 self.captureView.image = nil
                 self.captionText.text = nil
-                self.tabBarController?.selectedIndex = 1
+                self.tabBarController?.selectedIndex = 0
             } else {
                 print("error: \(error?.localizedDescription)")
             }
