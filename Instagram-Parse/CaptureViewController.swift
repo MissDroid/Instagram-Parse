@@ -28,7 +28,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.allowsEditing = true
         vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         
-        captionText.text = "Write a caption"
+        captionText.text = ""
         captionText.textColor = UIColor.grayColor()
         
         self.presentViewController(vc, animated: true, completion: nil)
